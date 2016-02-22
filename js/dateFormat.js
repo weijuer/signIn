@@ -56,3 +56,13 @@ Date.prototype.Format = function(fmt) {
      
 //var date = new Date();      
 //window.alert(date.Format("yyyy-MM-dd hh:mm:ss"));
+
+// 时间点比较
+function comptime( a, b ) {   
+	var dateA = new Date("1900/1/1 " + a);   
+	var dateB = new Date("1900/1/1 " + b);   
+	if(isNaN(dateA) || isNaN(dateB)) return null;   
+	if(dateA > dateB) return 1;   
+	if(dateA < dateB) return -1;   
+	return 0;   
+} 
