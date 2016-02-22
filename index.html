@@ -53,25 +53,23 @@
 	        resizeEnable: true
 	    });
 	    
-	    function signMap() {
-	    	map.plugin('AMap.Geolocation', function() {
-		        geolocation = new AMap.Geolocation({
-		            enableHighAccuracy: true,//是否使用高精度定位，默认:true
-		            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
-		            convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
-					showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
-					panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true	
-					zoomToAccuracy:true,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-		//          buttonDom:'<i class="posing-btn" >定位</i>',
-		            buttonOffset: new AMap.Pixel(10, 30), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-		            buttonPosition:'RB' //定位按钮位置，‘RB’-右下角
-		        });
-		        map.addControl(geolocation);
-		        geolocation.getCurrentPosition();
-		        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
-		        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
-		    });
-	    }
+    	map.plugin('AMap.Geolocation', function() {
+	        geolocation = new AMap.Geolocation({
+	            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+	            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+	            convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+				showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+				panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true	
+				zoomToAccuracy:true,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+	//          buttonDom:'<i class="posing-btn" >定位</i>',
+	            buttonOffset: new AMap.Pixel(10, 30), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+	            buttonPosition:'RB' //定位按钮位置，‘RB’-右下角
+	        });
+	        map.addControl(geolocation);
+	        geolocation.getCurrentPosition();
+	        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+	        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+	    });
 
 	    
 	    var signInSite =[]; //签到地点经纬度坐标
@@ -196,10 +194,12 @@
 		// 签到控制器
 		app.controller('signCtrl', function($scope, signMap) {
 			
+			// 签到内容
 		    $scope.signBox = [
 				{title:'上班',time:'09:00',btnName:'签到',className:'sign-in',iconClassName:'fa-sign-in'},
 				{title:'下班',time:'18:00',btnName:'签退',className:'sign-out',iconClassName:'fa-sign-out'}
 		    ];
+		    
 		    $scope.signCheck = function(index,item) {
 		    	var d = new Date();
 		    	var currtime = d.Format('HH:mm');
@@ -207,10 +207,27 @@
 		    	console.log(item.time);
 		    	console.log(currtime);
 		    	console.log(item);
+		    	
+		    	// 当前位置
+		    	var currPos = targetSiteLngLat.distance(signInSite).toFixed(1);
+		    	if( currPos >= 100 ) {
+		    		alert("超出签到范围!");
+		    		return;
+		    	}
+		    	
+		    	// 时间点比较
+		    	if(comptime(currtime,item.time) != -1) {
+		    		alert("签到时间已过!");
+		    		return;
+		    	}
+		    	
 		    	$scope.signed = index;
 		    	
 		    	//调用定位接口
 		    	signMap.locate();
+		    	
+		    	console.log(signInSite);
+		    	
 		    }
 		});
 	</script>
