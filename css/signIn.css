@@ -1,0 +1,183 @@
+/*格式化样式*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,header,hgroup,nav,section,article,aside,footer,figure,figcaption,menu,button {
+	margin:0;
+	padding:0
+}
+body {
+	font-family:Helvetica, "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	line-height:1.5;
+	font-size:14px;
+	color:#000;
+	background-color:#f8f9fa;
+	-webkit-user-select:none;
+	-webkit-text-size-adjust:none;
+	-webkit-tap-highlight-color:rgba(255,255,255,0);
+	outline:0
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:inherit;
+	font-weight:400
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0
+}
+fieldset,img {
+	border:0
+}
+li {
+	list-style:none
+}
+input,button,textarea,select {
+	font-family:inherit;
+	font-size:inherit;
+	font-weight:inherit;
+	border:0;
+	background:0 0;
+	-webkit-appearance:none;
+	outline:0
+}
+button:focus,input:focus,select:focus,textarea:focus {
+	outline:0;
+	-webkit-tap-highlight-color:transparent
+}
+a {
+	-webkit-touch-callout:none;
+	text-decoration:none;
+	color:#00a5e0;
+	outline:0
+}
+
+
+/*页面样式*/
+#container {
+	display: none;
+	width:100%; 
+	height: calc(100% - 45px); 
+	top: 45px;
+} 
+#tip,.amap-copyright,.amap-zoomcontrol, .amap-info-sharp{display: none;}
+.info-title{
+    color: #000;
+    font-size: 14px;
+    background-color: rgba(0,155,255,0.8);
+    line-height: 30px;
+    padding: 0px 0 0 6px;
+    font-weight: bold;
+    letter-spacing: 1px
+}
+.info-content{
+    padding: 6px;
+    color: #666666;
+    line-height: 25px;
+}
+.amap-info-content {
+	padding: 0;
+}
+.amap-info-close {
+	top: 8px;
+	color: #F7F7F7;
+}
+.amap-info-content:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    margin-left: -8px;
+    border: 10px solid transparent;
+    border-top-color: #FFF;
+}
+
+.top-bar {
+	position: relative;
+	background: #F7F7F7;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+}
+.top-bar span {
+	font-weight: bold;
+}
+.check-btn {
+	position: absolute;
+    right: 0.5em;
+    color: #FF4D27;
+}
+/*.posing-btn {
+	display: block;
+	text-indent:-9999px;
+	width: 18px;
+	height: 18px;
+	background: url(http://webapi.amap.com/theme/v1.3/map_view.png) -130px -185px;
+	cursor: pointer;
+}*/
+
+.today-info-box {
+	background: #00D15E;
+	padding: 1rem;
+	color: #FFF;
+}
+.week {
+	font-size: 30px;
+}
+.sign {
+    padding: 1em;
+    position: relative;
+}
+.sign:after {
+	position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 60px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+.sign-icon {
+	padding: 8px;
+	border-radius: 5px;
+	color: #FFF;
+	background: #00D15E;
+}
+.unsign {
+	background: #00D15E;
+}
+.signed {
+	background: #CCCCCC;
+}
+.sign-info {
+    margin-left: 40px;
+	text-indent: 3px;
+}
+.pull-middle {
+	position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.sub-title {
+	color: #888888;
+}
+.back {
+	color: #8E8E8E;
+}
+.btn {
+	background: #FF7400;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+}
+.sign-btn {
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    display: inline-block;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
