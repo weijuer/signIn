@@ -51,10 +51,10 @@ a {
 
 /*页面样式*/
 #container {
-	display: none;
-	width:100%; 
-	height: calc(100% - 45px); 
-	top: 45px;
+	/*display: none;*/
+    width: 100%;
+    height: calc(100% - 286px);
+    top: 286px;
 } 
 #tip,.amap-copyright,.amap-zoomcontrol, .amap-info-sharp{display: none;}
 .info-title{
