@@ -1,0 +1,399 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>浏览器定位-测试</title>
+    
+    <!--公共样式引用-->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+    
+    <link rel="stylesheet" href="css/main1119.css"/>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=f87230de111ef99c9f5d09833031428b&plugin=AMap.Geocoder"></script>
+    <!--<script type="text/javascript" src="js/addToolbar.js"></script>-->
+    <script src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/dateFormat.js" ></script>
+	<style>
+		/*格式化样式*/
+		body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,header,hgroup,nav,section,article,aside,footer,figure,figcaption,menu,button {
+			margin:0;
+			padding:0
+		}
+		body {
+			font-family:Helvetica, "Microsoft YaHei", Arial, Helvetica, sans-serif;
+			line-height:1.5;
+			font-size:14px;
+			color:#000;
+			background-color:#f8f9fa;
+			-webkit-user-select:none;
+			-webkit-text-size-adjust:none;
+			-webkit-tap-highlight-color:rgba(255,255,255,0);
+			outline:0
+		}
+		h1,h2,h3,h4,h5,h6 {
+			font-size:inherit;
+			font-weight:400
+		}
+		table {
+			border-collapse:collapse;
+			border-spacing:0
+		}
+		fieldset,img {
+			border:0
+		}
+		li {
+			list-style:none
+		}
+		input,button,textarea,select {
+			font-family:inherit;
+			font-size:inherit;
+			font-weight:inherit;
+			border:0;
+			background:0 0;
+			-webkit-appearance:none;
+			outline:0
+		}
+		button:focus,input:focus,select:focus,textarea:focus {
+			outline:0;
+			-webkit-tap-highlight-color:transparent
+		}
+		a {
+			-webkit-touch-callout:none;
+			text-decoration:none;
+			color:#00a5e0;
+			outline:0
+		}
+	
+		
+		/*页面样式*/
+		#container {
+			display: none;
+			width:100%; 
+			height: calc(100% - 45px); 
+			top: 45px;
+		} 
+		#tip,.amap-copyright,.amap-zoomcontrol, .amap-info-sharp{display: none;}
+      	.info-title{
+	        color: #000;
+	        font-size: 14px;
+	        background-color: rgba(0,155,255,0.8);
+	        line-height: 30px;
+	        padding: 0px 0 0 6px;
+	        font-weight: bold;
+	        letter-spacing: 1px
+      	}
+      	.info-content{
+	        padding: 6px;
+	        color: #666666;
+	        line-height: 25px;
+      	}
+      	.amap-info-content {
+      		padding: 0;
+      	}
+      	.amap-info-close {
+      		top: 8px;
+      		color: #F7F7F7;
+      	}
+      	.amap-info-content:after {
+      	    content: "";
+		    display: block;
+		    position: absolute;
+		    left: 50%;
+		    bottom: -18px;
+		    margin-left: -8px;
+		    border: 10px solid transparent;
+		    border-top-color: #FFF;
+      	}
+      	
+		.top-bar {
+			position: relative;
+			background: #F7F7F7;
+		    height: 45px;
+		    line-height: 45px;
+		    text-align: center;
+		}
+		.top-bar span {
+			font-weight: bold;
+		}
+		.check-btn {
+			position: absolute;
+		    right: 0.5em;
+	        color: #FF4D27;
+		}
+		/*.posing-btn {
+			display: block;
+			text-indent:-9999px;
+			width: 18px;
+			height: 18px;
+			background: url(http://webapi.amap.com/theme/v1.3/map_view.png) -130px -185px;
+			cursor: pointer;
+		}*/
+		
+		.today-info-box {
+			background: #00D15E;
+    		padding: 1rem;
+    		color: #FFF;
+		}
+		.week {
+			font-size: 30px;
+		}
+		.sign {
+		    padding: 1em;
+	        position: relative;
+		}
+		.sign:after {
+			position: absolute;
+		    right: 0;
+		    bottom: 0;
+		    left: 60px;
+		    height: 1px;
+		    content: '';
+		    -webkit-transform: scaleY(.5);
+		    transform: scaleY(.5);
+		    background-color: #c8c7cc;
+		}
+		.sign-icon {
+			padding: 8px;
+    		border-radius: 5px;
+    		color: #FFF;
+    		background: #00D15E;
+		}
+		.unsign {
+    		background: #00D15E;
+		}
+		.signed {
+    		background: #CCCCCC;
+		}
+		.sign-info {
+	        margin-left: 40px;
+    		text-indent: 3px;
+		}
+		.pull-middle {
+			position: absolute;
+		    top: 50%;
+		    -webkit-transform: translateY(-50%);
+		    transform: translateY(-50%);
+		}
+		.sub-title {
+			color: #888888;
+		}
+		.back {
+			color: #8E8E8E;
+		}
+		.btn {
+			background: #FF7400;
+		    color: #fff;
+		    padding: 0.5em 1em;
+		    border-radius: 5px;
+		}
+		.sign-btn {
+		    line-height: 1;
+		    position: absolute;
+		    top: 50%;
+		    right: 1em;
+		    display: inline-block;
+		    -webkit-transform: translateY(-50%);
+		    transform: translateY(-50%);
+		    text-decoration: none;
+		    -webkit-font-smoothing: antialiased;
+		}
+	</style>
+</head>
+<body ng-app="myApp" ng-cloak>
+	<div class="top-bar">
+		<a class="back pull-left" href="javascript:history.back();"><i class="fa fa-angle-left pull-middle fa-fw fa-2x"></i></a>
+		<span>考勤</span>
+		<a class="check-btn" href="javascript:void(0);">考勤统计</a>
+	</div>
+	<div class="today-info-box" ng-controller="todayCtrl">
+		<p class="week">{{ week }}</p>
+		<p class="toDate">{{ toDate | date:'yyyy年MM月dd日'}}</p>
+	</div>
+	<div class="control-box" ng-controller="signCtrl">
+		<div ng-repeat="x in signBox" class="sign {{ x.className }}">
+			<i class="fa {{ x.iconClassName }} fa-2x pull-left sign-icon" ng-class="{'unsign':unsign,'signed':signed == $index}"></i>
+			<div class="sign-info">
+				<span>{{ x.title }}</span>
+				<p class="sub-title">{{ x.time }}</p>
+			</div>
+			<div ng-bind="signedInfo">
+			</div>
+			<a class="btn sign-btn" ng-click="signCheck( $index,x )" href="javascript:;">{{ x.btnName }}</a>
+		</div>
+	</div>
+	
+	<div id='container'></div>
+	<!-- 通过 iframe 嵌入子页面 --> 
+	<!--<iframe src="" id="test"></iframe>-->
+	<div id="tip"></div>
+	<script type="text/javascript">
+		var map, geolocation;
+	    //加载地图，调用浏览器定位服务
+	    map = new AMap.Map('container', {
+	        resizeEnable: true
+	    });
+	    
+	    function signMap() {
+	    	map.plugin('AMap.Geolocation', function() {
+		        geolocation = new AMap.Geolocation({
+		            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+		            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+		            convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+					showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+					panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true	
+					zoomToAccuracy:true,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+		//          buttonDom:'<i class="posing-btn" >定位</i>',
+		            buttonOffset: new AMap.Pixel(10, 30), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+		            buttonPosition:'RB' //定位按钮位置，‘RB’-右下角
+		        });
+		        map.addControl(geolocation);
+		        geolocation.getCurrentPosition();
+		        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+		        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+		    });
+	    }
+
+	    
+	    var signInSite =[]; //签到地点经纬度坐标
+	    var targetSite = [118.863163, 32.019941];  // 目标地点经纬度坐标
+	    var targetSiteLngLat = new AMap.LngLat(118.863163, 32.019941); // 用于测算两点间的距离
+	    
+		//目标地点标记
+	    var targetMarker = new AMap.Marker({
+	    	position:targetSite,
+	    	icon : 'http://vdata.amap.com/icons/b18/1/2.png',
+	    	map : map
+	    });
+	    
+	    //加载标尺、缩放工具
+	    AMap.plugin(['AMap.ToolBar','AMap.Scale'],function(){
+		    var toolBar = new AMap.ToolBar();
+		    var scale = new AMap.Scale();
+		    map.addControl(toolBar);
+		    map.addControl(scale);
+	    });
+	    
+	    //解析定位成功结果
+	    function onComplete(data) {
+	        var str=['定位成功'];
+	        str.push('经度：' + data.position.getLng());
+	        str.push('纬度：' + data.position.getLat());
+	        str.push('精度：' + data.accuracy + ' 米');
+	        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+	        str.push('当前位置：'+ data.position );
+	        document.getElementById('tip').innerHTML = str.join('<br>');
+	        
+	        // 获取签到地址数据,经纬度数据
+	        signInSite.push(data.position.getLng());
+	        signInSite.push(data.position.getLat());
+	        
+			// 调用地址解析
+	        regeocoder();
+	       	
+	    }
+	    
+	    //解析定位错误信息
+	    function onError(data) {
+	        document.getElementById('tip').innerHTML = '定位失败';
+	    }
+		
+		// 逆地理编码
+	    function regeocoder() {
+			var geocoder = new AMap.Geocoder({
+			    radius: 1000,
+			    extensions: "all"
+	    	});  
+	    	
+		    geocoder.getAddress(signInSite, function(status, result) {
+		        if (status === 'complete' && result.info === 'OK') {
+		            geocoder_CallBack(result);
+		        }
+		    });        
+			
+			// 签到地点加标记
+		    var signInMaker = new AMap.Marker();
+	        signInMaker.setMap(map);
+	        map.setFitView();
+	        
+	        // 签到标记提示框事件
+		    signInMaker.on('click',function(e){
+		      infowindow.open(map,e.target.getPosition());
+		    });
+		    
+		    // 签到标记提示框创建
+		    var infowindow = new AMap.InfoWindow({
+	            content: '<div class="info-title">签到地址 （还差'+targetSiteLngLat.distance(signInSite).toFixed(1)+'米）</div><div class="info-content"><span id="result">正在定位...</span></div>',
+	            offset: new AMap.Pixel(-17, -40),
+	            size:new AMap.Size(300,0)
+		    });
+		    // 打开提示框
+		    infowindow.open(map,signInMaker.getPosition());
+	    }
+	    
+	    // 地址解析回调函数
+	    function geocoder_CallBack(data) {
+	        var address = data.regeocode.formattedAddress; //返回地址描述
+	        document.getElementById("result").innerHTML = address;
+	    }
+		
+	    
+	    // 解析时间
+	    var app = angular.module('myApp', []);
+	    
+	    // 自定义定位服务
+	    app.service('signMap', function() {
+			this.locate = function () {
+    	    	map.plugin('AMap.Geolocation', function() {
+			        geolocation = new AMap.Geolocation({
+			            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+			            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+			            convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+						showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+						panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true	
+						zoomToAccuracy:true,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+			//          buttonDom:'<i class="posing-btn" >定位</i>',
+			            buttonOffset: new AMap.Pixel(10, 30), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+			            buttonPosition:'RB' //定位按钮位置，‘RB’-右下角
+			        });
+			        map.addControl(geolocation);
+			        geolocation.getCurrentPosition();
+			        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+			        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+			    });
+		    }
+		});
+		
+	    // today日期格式化控制器
+		app.controller('todayCtrl', function($scope) {
+			var d = new Date();
+			var week = d.Format("EEE"); 
+//			var toDate = d.Format("yyyy年MM月dd日");
+		    $scope.week = week;
+//		    $scope.toDate = toDate;
+		    $scope.toDate = d;
+		});
+		
+		// 签到控制器
+		app.controller('signCtrl', function($scope, signMap) {
+			
+		    $scope.signBox = [
+				{title:'上班',time:'09:00',btnName:'签到',className:'sign-in',iconClassName:'fa-sign-in'},
+				{title:'下班',time:'18:00',btnName:'签退',className:'sign-out',iconClassName:'fa-sign-out'}
+		    ];
+		    $scope.signCheck = function(index,item) {
+		    	var d = new Date();
+		    	var currtime = d.Format('HH:mm');
+		    	
+		    	console.log(item.time);
+		    	console.log(currtime);
+		    	console.log(item);
+		    	$scope.signed = index;
+		    	
+		    	//调用定位接口
+		    	signMap.locate();
+		    }
+		});
+	</script>
+</body>
+</html>
