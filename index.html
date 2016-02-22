@@ -38,7 +38,9 @@
 			</div>
 			<div ng-bind="signedInfo">
 			</div>
-			<a class="btn sign-btn" ng-click="signCheck( $index,x )" href="javascript:;">{{ x.btnName }}</a>
+			<div class="sign-btn-box" ng-init="is_sign = true">
+				<a class="btn sign-btn" ng-click="signCheck( $index,x )" ng-if="is_sign" href="javascript:;">{{ x.btnName }}</a>
+			</div>
 		</div>
 	</div>
 	
@@ -200,9 +202,12 @@
 				{title:'下班',time:'18:00',btnName:'签退',className:'sign-out',iconClassName:'fa-sign-out'}
 		    ];
 		    
+		    
 		    $scope.signCheck = function(index,item) {
 		    	var d = new Date();
 		    	var currtime = d.Format('HH:mm');
+		    	
+		    	$scope.is_sign = true;
 		    	
 		    	console.log(item.time);
 		    	console.log(currtime);
@@ -221,7 +226,10 @@
 		    		return;
 		    	}
 		    	
+		    	
 		    	$scope.signed = index;
+		    	
+		    	$scope.signInfo = 'ok';
 		    	
 		    	//调用定位接口
 		    	signMap.locate();
