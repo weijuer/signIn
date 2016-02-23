@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <script type="text/javascript" src="js/dateFormat.js" ></script>
+
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <a class="mui-action-back mui-pull-right my-confirm">完成</a>
+	    <h1 class="mui-title">外勤</h1>
+	</header>
+	<div class="mui-content">
+		<div class="pos-map-box">
+			<a href="signPos.html">
+				<div class="pos-map-object-box">
+					<img class="pos-map-object mui-pull-left" src="images/muwu.jpg">
+				</div>
+				<div class="pos-map-info">
+					<h4 class="pos-title">白下高新1886汽车智谷</h4>
+					<p class='mui-ellipsis'>江苏省南京市秦淮区光华路168号</p>
+					<span class="pos-reset-btn" href="javascript:;">地点微调</span>
+				</div>
+			</a>
+		</div>
+		<div class="sign-time-box">
+			<ul class="sign-time-body">
+				<li class="mui-pull-left">
+					<i class="fa fa-calendar my-sign-icon"></i>
+					<span id="today" class="today">今天：2016-2-23</span>
+				</li>
+				<li class="mui-pull-right">
+					<i class="fa fa-clock-o my-sign-icon"></i>
+					<span id="currTime" class="current-time">签到时间：08:45</span>
+				</li>
+			</ul>
+		</div>
+		<div class="my-input-row">
+			<textarea class="sign-info-reason" rows="4" placeholder="在签到范围之外，请输入理由"></textarea>
+		</div>
+	</div>
+	
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+      	var today = document.getElementById("today");
+      	var currTime = document.getElementById("currTime");
+      	var d = new Date();
+      	var todayData = d.Format('EEE：yyyy.MM.dd');
+      	var currTimeData = d.Format("HH:ss");
+      	
+      	today.innerHTML = todayData;
+    </script>
+</body>
+</html>
