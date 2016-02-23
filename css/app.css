@@ -1,0 +1,142 @@
+/*格式化样式*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,header,hgroup,nav,section,article,aside,footer,figure,figcaption,menu,button {
+	margin:0;
+	padding:0
+}
+body {
+	font-family:Helvetica, "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	line-height:1.5;
+	font-size:14px;
+	color:#000;
+	background-color:#FFFFFF;
+	-webkit-user-select:none;
+	-webkit-text-size-adjust:none;
+	-webkit-tap-highlight-color:rgba(255,255,255,0);
+	outline:0
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:inherit;
+	font-weight:400
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0
+}
+fieldset,img {
+	border:0
+}
+li {
+	list-style:none
+}
+input,button,textarea,select {
+	font-family:inherit;
+	font-size:inherit;
+	font-weight:inherit;
+	border:0;
+	background:0 0;
+	-webkit-appearance:none;
+	outline:0
+}
+button:focus,input:focus,select:focus,textarea:focus {
+	outline:0;
+	-webkit-tap-highlight-color:transparent
+}
+a {
+	-webkit-touch-callout:none;
+	text-decoration:none;
+	color:#00a5e0;
+	outline:0
+}
+
+
+/*页面样式*/
+.mui-icon-left-nav {
+	color: #878C91;
+}
+.my-pull-middle {
+	position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.my-title {
+	padding: 1em;
+}
+
+.mui-bar-nav {
+    box-shadow: none;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #DEDBD7;
+}
+
+.my-cancel, .my-confirm {
+    display: block;
+    font-size: 16px;
+    color: #FF4D27;
+    padding: 10px 0;
+}
+
+.my-input-row {
+	padding: 10px;
+    background: #FFF;
+}
+.pos-map-object-box {
+	float: left;
+    width: 8em;
+    height: 6em;
+}
+.pos-map-box {
+	padding: 0 0.5em;
+	height: 6em;
+    background: #FFF;
+    border-bottom: 1px solid #DEDBD7;
+}
+.pos-map-box > a {
+	display: block;
+	position: relative;
+}
+.pos-map-object {
+	width: 8em;
+	height: 6em;
+}
+.pos-map-info {
+    margin-left: 8em;
+    padding: 0.5em;
+}
+.pos-title {
+    color: #4A4A4A;
+}
+.pos-reset-btn {
+    display: inline-block;
+    margin-top: 1em;
+    color: #0079FE;
+}
+.my-sign-icon {
+	padding: 4px;
+	border-radius: 5px;
+	color: #FFF;
+	background: #00D15E;
+}
+.sign-time-box {
+    background: #FFF;
+    border-bottom: 1px solid #DEDBD7;    
+}
+.sign-time-body {
+	padding: 2em 0.5em;
+	height: 6em;
+}
+
+.sign-time-body > li {
+	display: inline;
+    /*float: left;*/
+    width: 50%;
+    line-height: 2em;
+} 
+
+.sign-info-reason {
+	padding: 10px;
+	border: 1px solid #DEDBD7;
+}
+.today, .current-time {
+	color: #8f8f94;
+}
