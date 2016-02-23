@@ -54,11 +54,12 @@
       	temp_css =  '<style type="text/css">';
       	temp_css += 'body{padding:10px 0;margin:0;font-size:12px;}';
       	temp_css += '</style>';
-      	
       	console.log(temp_css);
+      	
+      	var chosenSite = {}; // 重选地址对象
       	var AmapChose = (function(){
             var iframe = document.getElementById('test').contentWindow;
-            var chosenSite = {};// 重选地址对象
+            
             
             setTimeout(function(){
             	// 添加css样式
@@ -95,8 +96,8 @@
 		var confirmBtn = document.getElementById("confirmBtn");
 		// 点击完成按钮
 		confirmBtn.addEventListener('tap',function() {
-			console.log(AmapChose.getSiteInfo().name);
-			console.log(AmapChose.chosenSite);
+			console.log(chosenSite.data.name);
+			console.log(chosenSite.data.location);
 		});
 		
     </script>
