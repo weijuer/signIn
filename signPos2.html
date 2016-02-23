@@ -56,8 +56,10 @@
       	temp_css += '</style>';
       	
       	console.log(temp_css);
-      	(function(){
+      	var AmapChose = (function(){
             var iframe = document.getElementById('test').contentWindow;
+            var chosenSite = {};// 重选地址对象
+            
             setTimeout(function(){
             	// 添加css样式
 //　　        			iframe.document.body.innerHTML+=temp_css;
@@ -68,17 +70,35 @@
             window.addEventListener("message", function(e){
             	console.log(e);
             	console.log(e.data.location);
+            	chosenSite = e;// 赋值重选地址对象信息
 //              alert('您选择了:' + e.data.name + ',' + e.data.location)
             }, false);
+            
+            
+            return {
+            	chosenSite: chosenSite,
+            	getChosenSite: function() {
+            		return chosenSite;
+            	},
+            	getSiteInfo: function() {
+            		var name = chosenSite.data.name;
+            		var siteLocation = chosenSite.data.location;
+            		return {
+            			name: name,
+            			siteLocation: siteLocation
+            		}
+            	}
+            }
         }());
         
-        
-//      window.onload = function(){
-//          var obj=window.frames["test"];
-//　　        		obj.document.body.innerHTML+=temp_css;
-//      }
 
-		var confirmBtn = document.getElementById("confirmBtn")
+		var confirmBtn = document.getElementById("confirmBtn");
+		// 点击完成按钮
+		confirmBtn.addEventListener('tap',function() {
+			console.log(AmapChose.getSiteInfo().name);
+			console.log(AmapChose.chosenSite);
+		});
+		
     </script>
 </body>
 </html>
