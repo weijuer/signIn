@@ -40,7 +40,7 @@
 <body>
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <a class="mui-action-back mui-pull-right my-confirm">完成</a>
+	    <a id="confirmBtn" class="mui-pull-right my-confirm" href="javascript:;">完成</a>
 	    <h1 class="mui-title">地点微调</h1>
 	</header>
 	<div class="mui-content">
@@ -67,6 +67,7 @@
             
             window.addEventListener("message", function(e){
             	console.log(e);
+            	console.log(e.data.location);
 //              alert('您选择了:' + e.data.name + ',' + e.data.location)
             }, false);
         }());
@@ -76,6 +77,8 @@
 //          var obj=window.frames["test"];
 //　　        		obj.document.body.innerHTML+=temp_css;
 //      }
+
+		var confirmBtn = document.getElementById("confirmBtn")
     </script>
 </body>
 </html>
