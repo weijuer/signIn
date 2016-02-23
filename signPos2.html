@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/main1119.css"/>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=f87230de111ef99c9f5d09833031428b&plugin=AMap.Geocoder"></script>
+ 	<style>
+ 		/*页面样式*/
+ 		.mui-content {
+		    height: calc(100% - 0px);
+ 		}
+ 		#test {
+		    height: 100%;
+		    width: 100%;
+		    border: 0;
+ 		}
+		#container {
+			/*display: none;*/
+		    width: 100%;
+		    height: calc(100% - 44px);
+		    top: 44px;
+		} 
+		#tip,.amap-copyright,.amap-zoomcontrol, .amap-info-sharp{display: none;}
+		.info-title{
+		    color: #000;
+		    font-size: 14px;
+		    background-color: rgba(0,155,255,0.8);
+		    line-height: 30px;
+		    padding: 0px 0 0 6px;
+		    font-weight: bold;
+		    letter-spacing: 1px
+		}
+ 	</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <a class="mui-action-back mui-pull-right my-confirm">完成</a>
+	    <h1 class="mui-title">地点微调</h1>
+	</header>
+	<div class="mui-content">
+	    <iframe id="test" src='http://m.amap.com/picker/?key=608d75903d29ad471362f8c58c550daf'></iframe>
+	</div>
+	
+	<script type="text/javascript" charset="UTF-8">
+      	mui.init();
+      	
+      	var temp_css;
+      	temp_css =  '<style type="text/css">';
+      	temp_css += 'body{padding:10px 0;margin:0;font-size:12px;}';
+      	temp_css += '</style>';
+      	
+      	console.log(temp_css);
+      	(function(){
+            var iframe = document.getElementById('test').contentWindow;
+            setTimeout(function(){
+            	// 添加css样式
+//　　        			iframe.document.body.innerHTML+=temp_css;
+
+                iframe.postMessage('hello','http://m.amap.com/picker/');
+            },500);
+            
+            window.addEventListener("message", function(e){
+            	console.log(e);
+//              alert('您选择了:' + e.data.name + ',' + e.data.location)
+            }, false);
+        }());
+        
+        
+//      window.onload = function(){
+//          var obj=window.frames["test"];
+//　　        		obj.document.body.innerHTML+=temp_css;
+//      }
+    </script>
+</body>
+</html>
