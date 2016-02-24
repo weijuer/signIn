@@ -14,7 +14,7 @@
  		.mui-content {
 		    height: calc(100% - 0px);
  		}
- 		#test {
+ 		#choseMap {
 		    height: 100%;
 		    width: 100%;
 		    border: 0;
@@ -44,7 +44,7 @@
 	    <h1 class="mui-title">地点微调</h1>
 	</header>
 	<div class="mui-content">
-	    <iframe id="test" src='http://m.amap.com/picker/?key=608d75903d29ad471362f8c58c550daf'></iframe>
+	    <iframe id="choseMap" src='http://m.amap.com/picker/?key=608d75903d29ad471362f8c58c550daf'></iframe>
 	</div>
 	
 	<script type="text/javascript" charset="UTF-8">
@@ -58,7 +58,7 @@
       	
       	var chosenSite = {}; // 重选地址对象
       	var AmapChose = (function(){
-            var iframe = document.getElementById('test').contentWindow;
+            var iframe = document.getElementById('choseMap').contentWindow;
             
             
             setTimeout(function(){
@@ -71,7 +71,10 @@
             window.addEventListener("message", function(e){
             	console.log(e);
             	console.log(e.data.location);
-            	chosenSite = e;// 赋值重选地址对象信息
+            	chosenSite = {// 赋值重选地址对象信息
+            		name: e.data.name,
+            		locate: e.data.location
+            	};
 //              alert('您选择了:' + e.data.name + ',' + e.data.location)
             }, false);
             
@@ -96,8 +99,8 @@
 		var confirmBtn = document.getElementById("confirmBtn");
 		// 点击完成按钮
 		confirmBtn.addEventListener('tap',function() {
-			console.log(chosenSite.data.name);
-			console.log(chosenSite.data.location);
+			console.log(chosenSite.name);
+			console.log(chosenSite.locate);
 		});
 		
     </script>
